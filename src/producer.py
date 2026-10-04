@@ -1,7 +1,7 @@
 import json
 import time
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 from confluent_kafka import Producer
 
 KAFKA_BOOTSTRAP_SERVERS = os.getenv('KAFKA_BOOTSTRAP_SERVERS', 'localhost:9092')
@@ -25,7 +25,7 @@ def generate_sensor_data(sensor_id: int):
     """Generate realistic mock sensor reading."""
     return {
         'sensor_id': f'sensor-{sensor_id:03d}',
-        'timestamp': datetime.utcnow().isoformat(),
+        'timestamp': datetime.now(timezone.utc).isoformat(),
         'temperature_c': round(20.0 + (sensor_id % 15) + (time.time() % 5), 2),
         'humidity_percent': round(40.0 + (sensor_id % 30), 1),
         'pressure_hpa': round(1013.0 + (sensor_id % 10 - 5), 1),

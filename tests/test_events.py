@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from src.producer import generate_sensor_data, create_producer
 from src.consumer import process_event
 
@@ -40,7 +40,7 @@ def test_high_temperature_alert():
     """Test 3: High temperature triggers alert flag."""
     hot_event = {
         'sensor_id': 'sensor-999',
-        'timestamp': datetime.utcnow().isoformat(),
+        'timestamp': datetime.now(timezone.utc).isoformat(),
         'temperature_c': 42.0,
         'humidity_percent': 50.0,
         'pressure_hpa': 1010.0,

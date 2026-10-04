@@ -1,6 +1,6 @@
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 from confluent_kafka import Consumer, KafkaError
 
 KAFKA_BOOTSTRAP_SERVERS = os.getenv('KAFKA_BOOTSTRAP_SERVERS', 'localhost:9092')
@@ -20,7 +20,7 @@ def process_event(data: dict):
     """Process a sensor event (could write to DB, alert, aggregate, etc.)."""
     processed = {
         **data,
-        'processed_at': datetime.utcnow().isoformat(),
+        'processed_at': datetime.now(timezone.utc).isoformat(),
         'status': 'processed',
         'alert': data['temperature_c'] > 35.0  # Example business rule
     }
