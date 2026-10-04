@@ -1,5 +1,6 @@
 # Kafka Event Pipeline
 
+
 A simple yet realistic **distributed event-driven system** using Apache Kafka. This project demonstrates producer-consumer architecture, message passing, ordering guarantees, and containerized deployment.
 
 **Perfect for a 2-3 minute class presentation**: "How events flow reliably in a distributed system."
